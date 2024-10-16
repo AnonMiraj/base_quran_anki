@@ -1,0 +1,613 @@
+﻿body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
+}
+
+@font-face {
+  font-display: block;
+  font-family: 'Suwar';
+  src: url(_fonts/_suwar.ttf);
+  unicode-range: u+fb8c-fbb1, u+fbd3-fc1f, u+fc38
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #fcdcab;
+  margin-bottom: 2px;
+  padding: 2px 0 0;
+  position: relative;
+  direction: rtl;
+  font-family: 'Suwar';
+}
+
+.page-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+.page {
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mushaf-layout .char {
+  font-size: 42px;
+  transition: color 0.3s;
+  position: relative;
+  display: inline-block;
+}
+
+.mushaf-layout .page {
+  text-align: justify;
+  text-align-last: justify;
+  border: 2px solid #0a0a0a;
+
+}
+
+.mushaf .ayah,
+.mushaf .ayah-container {
+  display: inline
+}
+
+.mushaf .page-wrapper {
+  font-size: 29.9px;
+  direction: rtl;
+  line-height: 1.85;
+  text-align: center;
+  display: flex;
+  align-content: center;
+  margin: auto
+}
+
+.surah-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 0
+}
+
+.line-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  text-align-last: center
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@font-face {
+  font-family: bismillah;
+  src: url('_fonts/_bismillah.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+.bismillah {
+  font-family: bismillah
+}
+
+@font-face {
+  font-family: icon-surah;
+
+  src: url('_fonts/_surah_names.ttf') format('truetype');
+  font-display: swap;
+}
+
+[class^=icon-surah],
+[class*=" icon-surah"] {
+  font-family: icon-surah !important;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.icon-surah-surah:before {
+  content: ""
+}
+
+.icon-surah1:before {
+  content: ""
+}
+
+.icon-surah2:before {
+  content: ""
+}
+
+.icon-surah3:before {
+  content: ""
+}
+
+.icon-surah4:before {
+  content: ""
+}
+
+.icon-surah5:before {
+  content: ""
+}
+
+.icon-surah6:before {
+  content: ""
+}
+
+.icon-surah7:before {
+  content: ""
+}
+
+.icon-surah8:before {
+  content: ""
+}
+
+.icon-surah9:before {
+  content: ""
+}
+
+.icon-surah10:before {
+  content: ""
+}
+
+.icon-surah11:before {
+  content: ""
+}
+
+.icon-surah12:before {
+  content: ""
+}
+
+.icon-surah13:before {
+  content: ""
+}
+
+.icon-surah14:before {
+  content: ""
+}
+
+.icon-surah15:before {
+  content: ""
+}
+
+.icon-surah16:before {
+  content: ""
+}
+
+.icon-surah17:before {
+  content: ""
+}
+
+.icon-surah18:before {
+  content: ""
+}
+
+.icon-surah19:before {
+  content: ""
+}
+
+.icon-surah20:before {
+  content: ""
+}
+
+.icon-surah21:before {
+  content: ""
+}
+
+.icon-surah22:before {
+  content: ""
+}
+
+.icon-surah23:before {
+  content: ""
+}
+
+.icon-surah24:before {
+  content: ""
+}
+
+.icon-surah25:before {
+  content: ""
+}
+
+.icon-surah26:before {
+  content: ""
+}
+
+.icon-surah27:before {
+  content: ""
+}
+
+.icon-surah28:before {
+  content: ""
+}
+
+.icon-surah29:before {
+  content: ""
+}
+
+.icon-surah30:before {
+  content: ""
+}
+
+.icon-surah31:before {
+  content: ""
+}
+
+.icon-surah32:before {
+  content: ""
+}
+
+.icon-surah33:before {
+  content: ""
+}
+
+.icon-surah34:before {
+  content: ""
+}
+
+.icon-surah35:before {
+  content: ""
+}
+
+.icon-surah36:before {
+  content: ""
+}
+
+.icon-surah37:before {
+  content: ""
+}
+
+.icon-surah38:before {
+  content: ""
+}
+
+.icon-surah39:before {
+  content: ""
+}
+
+.icon-surah40:before {
+  content: ""
+}
+
+.icon-surah41:before {
+  content: ""
+}
+
+.icon-surah42:before {
+  content: ""
+}
+
+.icon-surah43:before {
+  content: ""
+}
+
+.icon-surah44:before {
+  content: ""
+}
+
+.icon-surah45:before {
+  content: ""
+}
+
+.icon-surah46:before {
+  content: ""
+}
+
+.icon-surah47:before {
+  content: ""
+}
+
+.icon-surah48:before {
+  content: ""
+}
+
+.icon-surah49:before {
+  content: ""
+}
+
+.icon-surah50:before {
+  content: ""
+}
+
+.icon-surah51:before {
+  content: ""
+}
+
+.icon-surah52:before {
+  content: ""
+}
+
+.icon-surah53:before {
+  content: ""
+}
+
+.icon-surah54:before {
+  content: ""
+}
+
+.icon-surah55:before {
+  content: ""
+}
+
+.icon-surah56:before {
+  content: ""
+}
+
+.icon-surah57:before {
+  content: ""
+}
+
+.icon-surah58:before {
+  content: ""
+}
+
+.icon-surah59:before {
+  content: ""
+}
+
+.icon-surah60:before {
+  content: ""
+}
+
+.icon-surah61:before {
+  content: ""
+}
+
+.icon-surah62:before {
+  content: ""
+}
+
+.icon-surah63:before {
+  content: ""
+}
+
+.icon-surah64:before {
+  content: ""
+}
+
+.icon-surah65:before {
+  content: ""
+}
+
+.icon-surah66:before {
+  content: ""
+}
+
+.icon-surah67:before {
+  content: ""
+}
+
+.icon-surah68:before {
+  content: ""
+}
+
+.icon-surah69:before {
+  content: ""
+}
+
+.icon-surah70:before {
+  content: ""
+}
+
+.icon-surah71:before {
+  content: ""
+}
+
+.icon-surah72:before {
+  content: ""
+}
+
+.icon-surah73:before {
+  content: ""
+}
+
+.icon-surah74:before {
+  content: ""
+}
+
+.icon-surah75:before {
+  content: ""
+}
+
+.icon-surah76:before {
+  content: ""
+}
+
+.icon-surah77:before {
+  content: ""
+}
+
+.icon-surah78:before {
+  content: ""
+}
+
+.icon-surah79:before {
+  content: ""
+}
+
+.icon-surah80:before {
+  content: ""
+}
+
+.icon-surah81:before {
+  content: ""
+}
+
+.icon-surah82:before {
+  content: ""
+}
+
+.icon-surah83:before {
+  content: ""
+}
+
+.icon-surah84:before {
+  content: ""
+}
+
+.icon-surah85:before {
+  content: ""
+}
+
+.icon-surah86:before {
+  content: ""
+}
+
+.icon-surah87:before {
+  content: ""
+}
+
+.icon-surah88:before {
+  content: ""
+}
+
+.icon-surah89:before {
+  content: ""
+}
+
+.icon-surah90:before {
+  content: ""
+}
+
+.icon-surah91:before {
+  content: ""
+}
+
+.icon-surah92:before {
+  content: ""
+}
+
+.icon-surah93:before {
+  content: ""
+}
+
+.icon-surah94:before {
+  content: ""
+}
+
+.icon-surah95:before {
+  content: ""
+}
+
+.icon-surah96:before {
+  content: ""
+}
+
+.icon-surah97:before {
+  content: ""
+}
+
+.icon-surah98:before {
+  content: ""
+}
+
+.icon-surah99:before {
+  content: ""
+}
+
+.icon-surah100:before {
+  content: ""
+}
+
+.icon-surah101:before {
+  content: ""
+}
+
+.icon-surah102:before {
+  content: ""
+}
+
+.icon-surah103:before {
+  content: ""
+}
+
+.icon-surah104:before {
+  content: ""
+}
+
+.icon-surah105:before {
+  content: ""
+}
+
+.icon-surah106:before {
+  content: ""
+}
+
+.icon-surah107:before {
+  content: ""
+}
+
+.icon-surah108:before {
+  content: ""
+}
+
+.icon-surah109:before {
+  content: ""
+}
+
+.icon-surah110:before {
+  content: ""
+}
+
+.icon-surah111:before {
+  content: ""
+}
+
+.icon-surah112:before {
+  content: ""
+}
+
+.icon-surah113:before {
+  content: ""
+}
+
+.icon-surah114:before {
+  content: ""
+}
+
+
+
+
+@media (max-width: 600px) {
+  .mushaf-layout .char {
+    font-size: 26px;
+
+  }
+}
+
+@media (min-width: 601px) {
+  .mushaf-layout .char {
+    font-size: 42px;
+  }
+}

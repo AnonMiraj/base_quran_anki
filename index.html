@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" ml-update="aware">
+
+<head>
+    <title>Quran</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+        name="viewport">
+    <link rel="stylesheet" href="style.css" data-turbo-track="reload" media="screen">
+</head>
+<style>
+    .v4-tajweed {
+        font-family: 'v4-tajweed';
+        font-size: 30px;
+    }
+
+    @font-palette-values --Light {
+        font-family: 'v4-tajweed';
+        base-palette: 0;
+        override-colors:
+            0 #000000,
+            1 #A5A5A5,
+            2 #A5A5A5,
+            3 #B50000,
+            4 #FF7B00,
+            5 #CE9E00,
+            6 #09B000,
+            7 #3F48E6,
+            8 #2FADFF,
+            9 #F40000,
+            10 #2CA4AB,
+            11 #FF0080,
+            12 #D8E9D8,
+            13 #000000,
+            14 #000000,
+            15 #A5A5A5,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --Dark {
+        font-family: 'v4-tajweed';
+        base-palette: 1;
+        override-colors:
+            0 #FFFFFF,
+            1 #999999,
+            2 #999999,
+            3 #999999,
+            4 #FF8E3B,
+            5 #FFC1E0,
+            6 #26B55D,
+            7 #3C84D5,
+            8 #00DEFF,
+            9 #FF5E8E,
+            10 #009B68,
+            11 #AA8A1C,
+            12 #2E544F,
+            13 #FFFFFF,
+            14 #FFFFFF,
+            15 #999999,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --Sepia {
+        font-family: 'v4-tajweed';
+        base-palette: 2;
+        override-colors:
+            0 #000000,
+            1 #ABABAB,
+            2 #ABABAB,
+            3 #E67B00,
+            4 #E67B00,
+            5 #C09725,
+            6 #09B000,
+            7 #134FE1,
+            8 #00B4E0,
+            9 #FF0000,
+            10 #D52B5E,
+            11 #56A977,
+            12 #FFFFFF,
+            13 #6C0000,
+            14 #000000,
+            15 #ABABAB,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --Normal1 {
+        font-family: 'v4-tajweed';
+        base-palette: 3;
+        override-colors:
+            0 #000000,
+            1 #000000,
+            2 #000000,
+            3 #000000,
+            4 #000000,
+            5 #000000,
+            6 #000000,
+            7 #000000,
+            8 #000000,
+            9 #000000,
+            10 #2CA4AB,
+            11 #FF0080,
+            12 #D8E9D8,
+            13 #000000,
+            14 #000000,
+            15 #000000,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --Normal2 {
+        font-family: 'v4-tajweed';
+        base-palette: 4;
+        override-colors:
+            0 #FFFFFF,
+            1 #FFFFFF,
+            2 #FFFFFF,
+            3 #FFFFFF,
+            4 #FFFFFF,
+            5 #FFFFFF,
+            6 #FFFFFF,
+            7 #FFFFFF,
+            8 #FFFFFF,
+            9 #FFFFFF,
+            10 #009B68,
+            11 #AA8A1C,
+            12 #2E544F,
+            13 #FFFFFF,
+            14 #FFFFFF,
+            15 #FFFFFF,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --Normal3 {
+        font-family: 'v4-tajweed';
+        base-palette: 5;
+        override-colors:
+            0 #000000,
+            1 #000000,
+            2 #000000,
+            3 #000000,
+            4 #000000,
+            5 #000000,
+            6 #000000,
+            7 #000000,
+            8 #000000,
+            9 #000000,
+            10 #D52B5E,
+            11 #56A977,
+            12 #FFFFFF,
+            13 #6C0000,
+            14 #000000,
+            15 #000000,
+            16 #CC9E00,
+            17 #00B000;
+    }
+
+    @font-palette-values --blackText {
+        font-family: 'v4-tajweed';
+        base-palette: 5;
+        override-colors:
+            0 #000,
+            1 #000,
+            2 #000,
+            3 #000,
+            4 #000,
+            5 #000,
+            6 #000,
+            7 #000,
+            8 #000,
+            9 #000,
+            10 #000,
+            11 #000,
+            12 #fff,
+            13 #000,
+            14 #000,
+            15 #000,
+            16 #000,
+            17 #000,
+            18 #000;
+    }
+
+    .theme-light2 {
+        font-palette: --Normal1;
+        background: #fff;
+    }
+
+    .theme-dark2 {
+        font-palette: --Normal2;
+        background: #343a40;
+    }
+
+    .theme-sepia2 {
+        font-palette: --Normal3;
+        background: #fff7ea;
+    }
+
+    .theme-black-text {
+        font-palette: --blackText;
+        background: #fff;
+    }
+
+    .theme-light {
+        font-palette: --Light;
+        background: #fff;
+    }
+
+    .theme-dark {
+        font-palette: --Dark;
+        background: #343a40;
+    }
+
+    .theme-sepia {
+        font-palette: --Sepia;
+        background: #fff7ea;
+    }
+</style>
+
+
+<body>
+
+    <div class="mushaf-layout v4-tajweed">
+        <div class="theme-light mushaf mushaf-v4-tajweed v4-tajweed " data-controller="mushaf-page">
+            <div class="page-wrapper container-lg flex">
+                <div id="page" data-controller="tajweed-font" class="page v4-tajweed theme-sepia">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const page = document.getElementById('page');
+            const toggleAllBtn = document.getElementById('toggleAll');
+            const nextWordBtn = document.getElementById('nextWord');
+            const nextAyahBtn = document.getElementById('nextAyah');
+
+            let allVisible = false;
+            let wordIndex = 0;
+
+            const chars = Array.from(page.querySelectorAll('.char'));
+
+            const style = document.createElement('style');
+
+            function revealChar(char) {
+                if (char.timeoutId) {
+                    clearTimeout(char.timeoutId);
+                }
+                char.style.color = 'black';
+                char.style.borderBottom = '2px solid transparent';
+            }
+
+            function hideChar(char) {
+                char.style.color = 'transparent';
+                char.style.borderBottom = '2px solid black';
+            }
+
+            chars.forEach(char => {
+                if (!char.classList.contains('char-end')) {
+                    hideChar(char);
+
+                    char.addEventListener('mouseenter', () => {
+                        if (char.style.color === 'transparent') {
+                            revealChar(char);
+                            char.timeoutId = setTimeout(() => {
+                                hideChar(char);
+                            }, 4000);
+                        }
+                    });
+
+                }
+            });
+
+            function toggleAll() {
+                allVisible = !allVisible;
+                chars.forEach(char => {
+                    if (allVisible) {
+                        revealChar(char);
+                    }
+                    else {
+                        hideChar(char);
+                    }
+                });
+                if (!allVisible) {
+                    wordIndex = 0;
+                    chars.forEach(char => {
+                        if (char.classList.contains('char-end')) {
+                            revealChar(char);
+                        }
+                    });
+                }
+            }
+
+            function nextWord() {
+
+                if (wordIndex < chars.length) {
+                    revealChar(chars[wordIndex]);
+                    wordIndex++;
+                    if (wordIndex < chars.length && chars[wordIndex - 1].classList.contains('char-end')) {
+                        revealChar(chars[wordIndex]);
+                        wordIndex++;
+                    }
+                }
+                else {
+                    allVisible = 1;
+                }
+
+            }
+
+            function nextAyah() {
+                while (wordIndex < chars.length) {
+                    revealChar(chars[wordIndex]);
+                    wordIndex++;
+                    if (chars[wordIndex - 1].classList.contains('char-end')) {
+                        break;
+                    }
+                    else {
+                        allVisible = 1;
+                    }
+                }
+            }
+
+            toggleAllBtn.addEventListener('click', toggleAll);
+            nextWordBtn.addEventListener('click', nextWord);
+            nextAyahBtn.addEventListener('click', nextAyah);
+        });
+        function setThemeByName(themeName) {
+            document.getElementById('page').className = 'page v4-tajweed ' + themeName;
+        }
+       <!-- setThemeByName("theme-dark"); -->
+    </script>
+
+
+</body>
+
+</html>

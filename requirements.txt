@@ -1,0 +1,5 @@
+beautifulsoup4
+tqdm
+genanki
+sqlite3
+concurrent.futures
