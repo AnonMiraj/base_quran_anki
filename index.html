@@ -234,32 +234,82 @@
     </div>
 
     <script>
+        let allVisible = false;
+        let wordIndex = 0;
+        let themeName = "theme-sepia";
+
+        const chars = Array.from(page.querySelectorAll('.char'));
+
+        const style = document.createElement('style');
+
+        function revealChar(char) {
+            if (char.timeoutId) {
+                clearTimeout(char.timeoutId);
+            }
+            char.style.color = 'black';
+            char.style.borderBottom = '2px solid transparent';
+        }
+
+        function hideChar(char) {
+            char.style.color = 'transparent';
+            char.style.borderBottom = '2px solid black';
+        }
+        function toggleAll() {
+            allVisible = !allVisible;
+            chars.forEach(char => {
+                if (allVisible) {
+                    revealChar(char);
+                }
+                else {
+                    hideChar(char);
+                }
+            });
+            if (!allVisible) {
+                wordIndex = 0;
+                chars.forEach(char => {
+                    if (char.classList.contains('char-end')) {
+                        revealChar(char);
+                    }
+                });
+            }
+        }
+
+        function nextWord() {
+
+            if (wordIndex < chars.length) {
+                revealChar(chars[wordIndex]);
+                wordIndex++;
+                if (wordIndex < chars.length && chars[wordIndex - 1].classList.contains('char-end')) {
+                    revealChar(chars[wordIndex]);
+                    wordIndex++;
+                }
+            }
+            else {
+                allVisible = 1;
+            }
+
+        }
+
+        function nextAyah() {
+            while (wordIndex < chars.length) {
+                revealChar(chars[wordIndex]);
+                wordIndex++;
+                if (chars[wordIndex - 1].classList.contains('char-end')) {
+                    break;
+                }
+                else {
+                    allVisible = 1;
+                }
+            }
+        }
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             const page = document.getElementById('page');
             const toggleAllBtn = document.getElementById('toggleAll');
             const nextWordBtn = document.getElementById('nextWord');
             const nextAyahBtn = document.getElementById('nextAyah');
-
-            let allVisible = false;
-            let wordIndex = 0;
-
-            const chars = Array.from(page.querySelectorAll('.char'));
-
-            const style = document.createElement('style');
-
-            function revealChar(char) {
-                if (char.timeoutId) {
-                    clearTimeout(char.timeoutId);
-                }
-                char.style.color = 'black';
-                char.style.borderBottom = '2px solid transparent';
-            }
-
-            function hideChar(char) {
-                char.style.color = 'transparent';
-                char.style.borderBottom = '2px solid black';
-            }
-
             chars.forEach(char => {
                 if (!char.classList.contains('char-end')) {
                     hideChar(char);
@@ -276,66 +326,12 @@
                 }
             });
 
-            function toggleAll() {
-                allVisible = !allVisible;
-                chars.forEach(char => {
-                    if (allVisible) {
-                        revealChar(char);
-                    }
-                    else {
-                        hideChar(char);
-                    }
-                });
-                if (!allVisible) {
-                    wordIndex = 0;
-                    chars.forEach(char => {
-                        if (char.classList.contains('char-end')) {
-                            revealChar(char);
-                        }
-                    });
-                }
-            }
-
-            function nextWord() {
-
-                if (wordIndex < chars.length) {
-                    revealChar(chars[wordIndex]);
-                    wordIndex++;
-                    if (wordIndex < chars.length && chars[wordIndex - 1].classList.contains('char-end')) {
-                        revealChar(chars[wordIndex]);
-                        wordIndex++;
-                    }
-                }
-                else {
-                    allVisible = 1;
-                }
-
-            }
-
-            function nextAyah() {
-                while (wordIndex < chars.length) {
-                    revealChar(chars[wordIndex]);
-                    wordIndex++;
-                    if (chars[wordIndex - 1].classList.contains('char-end')) {
-                        break;
-                    }
-                    else {
-                        allVisible = 1;
-                    }
-                }
-            }
-
             toggleAllBtn.addEventListener('click', toggleAll);
             nextWordBtn.addEventListener('click', nextWord);
             nextAyahBtn.addEventListener('click', nextAyah);
         });
-        function setThemeByName(themeName) {
-            document.getElementById('page').className = 'page v4-tajweed ' + themeName;
-        }
-       <!-- setThemeByName("theme-dark"); -->
+        document.getElementById('page').className = 'page v4-tajweed ' + themeName;
     </script>
-
-
 </body>
 
 </html>

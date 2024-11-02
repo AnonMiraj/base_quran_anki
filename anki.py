@@ -12,9 +12,19 @@ with open("index.html", 'r', encoding='utf-8') as file:
     soup = BeautifulSoup(content, 'html.parser')
 
     if soup.find(['html', 'body']):
-        script_tags = soup.find_all('script')
-        scripts_content = "\n".join(str(tag) for tag in script_tags)
 
+        front_html = str(soup)
+        back_html = str(soup)
+
+        front_soup = BeautifulSoup(front_html, 'html.parser')
+        back_soup = BeautifulSoup(back_html, 'html.parser')
+
+        front_script_tag = front_soup.find('script')
+        back_script_tag = back_soup.find('script')
+
+        front_script_tag.append(
+            "document.addEventListener('DOMContentLoaded', function (){ for(let i = 0; i < 7; i++) nextWord();} );")
+        back_script_tag.append("document.addEventListener('DOMContentLoaded', function (){toggleAll();} );")
 
 anki_quran_model = genanki.Model(
     1871019098,
@@ -26,8 +36,8 @@ anki_quran_model = genanki.Model(
     templates=[
         {
             'name': 'Card 1',
-            'qfmt': '{{Html}}'+scripts_content,
-            'afmt': '{{FrontSide}}',
+            'qfmt': '{{Html}}'+str(front_script_tag),
+            'afmt': '{{Html}}'+str(back_script_tag),
         },
     ],
     css="\n"+style
@@ -45,7 +55,7 @@ my_deck = genanki.Deck(
 class MyNote(genanki.Note):
     @property
     def guid(self):
-        return genanki.guid_for(self.fields[0], self.fields[1])
+        return genanki.guid_for(self.fields[0])
 
 
 for file_path in directory.iterdir():
@@ -62,6 +72,9 @@ for file_path in directory.iterdir():
                     prev_button.decompose()
                 if next_button:
                     next_button.decompose()
+
+                script_tag = soup.find('script')
+                script_tag.decompose()
 
                 style_tags = soup.find_all('style')
                 style_content = "\n".join(str(tag) for tag in style_tags)

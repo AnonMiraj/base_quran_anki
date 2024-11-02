@@ -219,12 +219,6 @@ def process_page(page_number):
         add_font_face(soup, f"pages/{int(page_number):03}.html", page_number)
 
 
-def run_all_pages():
-    with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-        futures = [executor.submit(process_page, page_number) for page_number in range(1, 605)]
-        for future in tqdm(as_completed(futures), total=604, desc="Processing Pages", unit="page"):
-            future.result()
-
-
 if __name__ == "__main__":
-    run_all_pages()
+    for page_number in tqdm(range(1, 605), desc="Processing Pages"):
+        process_page(page_number)
