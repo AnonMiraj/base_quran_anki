@@ -330,7 +330,51 @@
             nextWordBtn.addEventListener('click', nextWord);
             nextAyahBtn.addEventListener('click', nextAyah);
         });
-        document.getElementById('page').className = 'page v4-tajweed ' + themeName;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const fitContentToPage = () => {
+                const page = document.querySelector(".page");
+                const container = document.body;
+
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+
+                const contentWidth = page.scrollWidth;
+                const contentHeight = page.scrollHeight;
+
+                const scaleWidth = containerWidth / contentWidth;
+                const scaleHeight = containerHeight / contentHeight;
+
+                const scale = Math.min(scaleWidth, scaleHeight);
+
+                page.style.transform = `scale(${scale})`;
+                page.style.transformOrigin = "top center";
+            };
+
+            fitContentToPage();
+            window.addEventListener("resize", fitContentToPage);
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const applyThemeBasedOnSystemPreference = () => {
+                const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                const page = document.getElementById('page');
+
+                if (isDarkMode) {
+                    page.className = 'page v4-tajweed theme-dark';
+                } else {
+                    page.className = 'page v4-tajweed theme-sepia';
+                }
+            };
+
+            applyThemeBasedOnSystemPreference();
+
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThemeBasedOnSystemPreference);
+            }
+        });
+        //document.getElementById('page').className = 'page v4-tajweed ' + themeName;
     </script>
 </body>
 
