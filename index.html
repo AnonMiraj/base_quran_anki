@@ -314,17 +314,37 @@
                 if (!char.classList.contains('char-end')) {
                     hideChar(char);
 
-                    char.addEventListener('mouseenter', () => {
-                        if (char.style.color === 'transparent') {
-                            revealChar(char);
-                            char.timeoutId = setTimeout(() => {
-                                hideChar(char);
-                            }, 4000);
-                        }
+                    char.addEventListener('mouseenter', handleInteraction);
+                    char.addEventListener('touchstart', (e) => {
+                        e.preventDefault(); // Prevent default touch behavior
+                        handleInteraction(char);
                     });
-
+                    char.addEventListener('touchmove', (e) => {
+                        e.preventDefault(); // Prevent default touch behavior
+                        handleTouchMove(e);
+                    });
                 }
             });
+
+            function handleInteraction(char) {
+                if (char.style.color === 'transparent') {
+                    revealChar(char);
+                    char.timeoutId = setTimeout(() => {
+                        hideChar(char);
+                    }, 4000);
+                }
+            }
+
+            function handleTouchMove(event) {
+                const touches = event.touches;
+                for (let i = 0; i < touches.length; i++) {
+                    const touch = touches[i];
+                    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (element && element.classList.contains('char')) {
+                        handleInteraction(element);
+                    }
+                }
+            }
 
             toggleAllBtn.addEventListener('click', toggleAll);
             nextWordBtn.addEventListener('click', nextWord);
