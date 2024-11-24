@@ -1,3 +1,5 @@
 *.html
 !index.html
+pages/
+!pages/_fonts/
 output.apkg

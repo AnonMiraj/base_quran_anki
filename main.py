@@ -47,7 +47,7 @@ def add_font_face(soup, output_file, page_number):
     new_style = f"""
     @font-face {{
         font-family: 'v4-tajweed';
-        src: url('_fonts/_p{page_number}.ttf?v=1') format('truetype');
+        src: url('_p{page_number}.ttf?v=1') format('truetype');
         font-display: swap;
     }}
     """

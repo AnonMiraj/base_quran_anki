@@ -8,14 +8,13 @@ html {
   -ms-user-select: none;
   touch-action: manipulation;
   user-select: none;
-  overflow-y: hidden;
 
 }
 
 @font-face {
   font-display: block;
   font-family: 'Suwar';
-  src: url(_fonts/_suwar.ttf);
+  src: url(_suwar.ttf);
   unicode-range: u+fb8c-fbb1, u+fbd3-fc1f, u+fc38
 }
 
@@ -112,7 +111,7 @@ header {
 
 @font-face {
   font-family: bismillah;
-  src: url('_fonts/_bismillah.ttf') format('truetype');
+  src: url('_bismillah.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap
@@ -125,7 +124,7 @@ header {
 @font-face {
   font-family: icon-surah;
 
-  src: url('_fonts/_surah_names.ttf') format('truetype');
+  src: url('_surah_names.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -600,9 +599,6 @@ header {
 .icon-surah114:before {
   content: ""
 }
-
-
-
 
 @media (max-width: 600px) {
   .mushaf-layout .char {

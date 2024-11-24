@@ -23,7 +23,7 @@ with open("index.html", 'r', encoding='utf-8') as file:
         back_script_tag = back_soup.find('script')
 
         front_script_tag.append(
-            "document.addEventListener('DOMContentLoaded', function (){ for(let i = 0; i < 7; i++) nextWord();} );")
+            "document.addEventListener('DOMContentLoaded', function (){ for(let i = 0; i < 5; i++) nextWord();} );")
         back_script_tag.append("document.addEventListener('DOMContentLoaded', function (){toggleAll();} );")
 
 anki_quran_model = genanki.Model(
@@ -50,6 +50,7 @@ directory = Path('./pages/')
 my_deck = genanki.Deck(
     2059400140,
     'Quran_anki')
+
 
 
 class MyNote(genanki.Note):
@@ -91,4 +92,8 @@ for file_path in directory.iterdir():
                 my_deck.add_note(my_note)
 
 
-genanki.Package(my_deck).write_to_file('output.apkg')
+my_package = genanki.Package(my_deck)
+my_package.media_files = [
+    os.path.join("pages/_fonts/", file) for file in os.listdir("pages/_fonts/") if file.endswith(".ttf")
+]
+my_package.write_to_file('output.apkg')
