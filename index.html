@@ -232,7 +232,7 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
     <script>
         let allVisible = false;
         let wordIndex = 0;
@@ -399,6 +399,53 @@
             }
         });
         //document.getElementById('page').className = 'page v4-tajweed ' + themeName;
+
+        let isPlaying = false;
+        let audioPlayer = null;
+
+        function playAyah(surahNumber, ayahNumber) {
+            const audioURL = "https://audio-cdn.tarteel.ai/quran/husaryMuallim/" + surahNumber.padStart(3, '0') + ayahNumber.padStart(3, '0') + ".mp3";
+
+            // If an audio is already playing, pause and remove it
+            if (isPlaying && audioPlayer) {
+                audioPlayer.pause();
+                audioPlayer.remove();
+                isPlaying = false;
+                audioPlayer = null;
+            }
+
+            console.log('Audio URL:', audioURL);
+
+            // Create a new audio element
+            audioPlayer = document.createElement('audio');
+            audioPlayer.id = 'dynamicAudioPlayer';
+            audioPlayer.controls = true;
+            audioPlayer.src = audioURL;
+
+            // Append the audio player to the page
+            const pageContainer = document.getElementById('page');
+            pageContainer.appendChild(audioPlayer, pageContainer.firstChild);
+
+            // Play the audio
+            audioPlayer.play();
+            console.log('Playing:', audioURL);
+
+            isPlaying = true;
+
+            // Remove the audio player when playback finishes
+            audioPlayer.addEventListener('ended', () => {
+                audioPlayer.remove();
+                isPlaying = false;
+                audioPlayer = null; 
+            });
+        }
+
+        function handleAyahClick(ayahKey) {
+            let surah_number = ayahKey.split(':')[0];
+            let ayah_number = ayahKey.split(':')[1];
+
+            playAyah(surah_number, ayah_number);
+        }
     </script>
 </body>
 

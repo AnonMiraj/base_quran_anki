@@ -72,8 +72,15 @@ def create_line_div(soup, line_data, line_number):
 
         if verse_num != current_ayah_middle:
             current_ayah_middle = verse_num
-            ayah_container = soup.new_tag("div", **{"class": "ayah-container"})
-            ayah_div = soup.new_tag("div", **{"class": "ayah", "data-ayah": f"{surah_num}:{verse_num}"})
+            ayah_container = soup.new_tag("div", **{
+                "class": "ayah-container",
+                "ondblclick": f"handleAyahClick('{surah_num}:{verse_num}')",
+                "style": "cursor: pointer;"  
+            })
+            ayah_div = soup.new_tag("div", **{
+                "class": "ayah",
+                "data-ayah": f"{surah_num}:{verse_num}"
+            })
             ayah_container.append(ayah_div)
             line_div.append(ayah_container)
 
