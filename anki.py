@@ -94,6 +94,6 @@ for file_path in directory.iterdir():
 
 my_package = genanki.Package(my_deck)
 my_package.media_files = [
-    os.path.join("pages/_fonts/", file) for file in os.listdir("pages/_fonts/") if file.endswith(".ttf")
+    os.path.join("pages/", file) for file in os.listdir("pages/") if file.endswith(".ttf")
 ]
 my_package.write_to_file('output.apkg')

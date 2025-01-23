@@ -75,6 +75,7 @@ def create_line_div(soup, line_data, line_number):
             ayah_container = soup.new_tag("div", **{
                 "class": "ayah-container",
                 "ondblclick": f"handleAyahClick('{surah_num}:{verse_num}')",
+                "ontouchstart": f"handleTouch('{surah_num}:{verse_num}')",
                 "style": "cursor: pointer;"  
             })
             ayah_div = soup.new_tag("div", **{

@@ -315,7 +315,6 @@
                     hideChar(char);
 
                     char.addEventListener('mouseenter', (e) => {
-                        console.log('Mouse enter on:', char);
                         handleInteraction(char);
                     });
 
@@ -414,7 +413,6 @@
                 audioPlayer = null;
             }
 
-            console.log('Audio URL:', audioURL);
 
             // Create a new audio element
             audioPlayer = document.createElement('audio');
@@ -428,7 +426,6 @@
 
             // Play the audio
             audioPlayer.play();
-            console.log('Playing:', audioURL);
 
             isPlaying = true;
 
@@ -436,7 +433,7 @@
             audioPlayer.addEventListener('ended', () => {
                 audioPlayer.remove();
                 isPlaying = false;
-                audioPlayer = null; 
+                audioPlayer = null;
             });
         }
 
@@ -445,6 +442,19 @@
             let ayah_number = ayahKey.split(':')[1];
 
             playAyah(surah_number, ayah_number);
+        }
+
+        let lastTouchTime = 0;
+
+        function handleTouch(ayah) {
+            const currentTime = new Date().getTime();
+            const timeDifference = currentTime - lastTouchTime;
+
+            if (timeDifference < 400) {
+                handleAyahClick(ayah);
+            }
+
+            lastTouchTime = currentTime;
         }
     </script>
 </body>
