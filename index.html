@@ -232,7 +232,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
     <script>
         let allVisible = false;
         let wordIndex = 0;
@@ -444,18 +443,20 @@
             playAyah(surah_number, ayah_number);
         }
 
-        let lastTouchTime = 0;
+        let touchTimeout = null;
 
         function handleTouch(ayah) {
-            const currentTime = new Date().getTime();
-            const timeDifference = currentTime - lastTouchTime;
-
-            if (timeDifference < 400) {
+            if (touchTimeout) {
+                clearTimeout(touchTimeout);
+                touchTimeout = null;
                 handleAyahClick(ayah);
+            } else {
+                touchTimeout = setTimeout(() => {
+                    touchTimeout = null;
+                }, 300);
             }
-
-            lastTouchTime = currentTime;
         }
+
     </script>
 </body>
 

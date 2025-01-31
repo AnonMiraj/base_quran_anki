@@ -23,7 +23,7 @@ with open("index.html", 'r', encoding='utf-8') as file:
         back_script_tag = back_soup.find('script')
 
         front_script_tag.append(
-            "document.addEventListener('DOMContentLoaded', function (){ for(let i = 0; i < 5; i++) nextWord();} );")
+            "document.addEventListener('DOMContentLoaded', function (){ for(let i = 0; i < 4; i++) nextWord();} );")
         back_script_tag.append("document.addEventListener('DOMContentLoaded', function (){toggleAll();} );")
 
 anki_quran_model = genanki.Model(
@@ -36,8 +36,8 @@ anki_quran_model = genanki.Model(
     templates=[
         {
             'name': 'Card 1',
-            'qfmt': '{{Html}}'+str(front_script_tag),
-            'afmt': '{{Html}}'+str(back_script_tag),
+            'qfmt': '{{Html}}'+"\n"+str(front_script_tag),
+            'afmt': '{{Html}}'+"\n"+str(back_script_tag),
         },
     ],
     css="\n"+style
