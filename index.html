@@ -224,7 +224,7 @@
 <body>
 
     <div class="mushaf-layout v4-tajweed">
-        <div class="theme-light mushaf mushaf-v4-tajweed v4-tajweed " data-controller="mushaf-page">
+        <div class="theme-sepia mushaf mushaf-v4-tajweed v4-tajweed " data-controller="mushaf-page">
             <div class="page-wrapper container-lg flex">
                 <div id="page" data-controller="tajweed-font" class="page v4-tajweed theme-sepia">
 
@@ -377,16 +377,23 @@
             window.addEventListener("resize", fitContentToPage);
         });
 
+
         document.addEventListener("DOMContentLoaded", () => {
             const applyThemeBasedOnSystemPreference = () => {
                 const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-                const page = document.getElementById('page');
-
+                const header = document.querySelector("header");
+                if (header) {
+                    header.style.color = isDarkMode ? "#ffffff" : "#000000"; 
+                }
                 if (isDarkMode) {
-                    page.className = 'page v4-tajweed theme-dark';
+                    document.querySelectorAll('[class*="theme-sepia"]').forEach(element => {
+                        element.className = element.className.replace(/theme-sepia/g, 'theme-dark2');
+                    });
                 } else {
-                    page.className = 'page v4-tajweed theme-sepia';
+                    document.querySelectorAll('[class*="theme-dark2"]').forEach(element => {
+                        element.className = element.className.replace(/theme-dark2/g, 'theme-sepia');
+                    });
                 }
             };
 
@@ -396,6 +403,7 @@
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThemeBasedOnSystemPreference);
             }
         });
+
         //document.getElementById('page').className = 'page v4-tajweed ' + themeName;
 
         let isPlaying = false;
