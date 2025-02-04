@@ -35,13 +35,6 @@ python anki.py
 
 You can easily modify the layout and font. Simply edit the relevant sections in the code and provide the databases to adjust the appearance to your liking.
 
-## Font Setup
-
-To ensure proper font rendering in Anki:
-
-Copy this `pages/_fonts` to your Anki profile directory (typically `~/.local/share/Anki2/`).
-
-
 
 ## Acknowledgments
 
