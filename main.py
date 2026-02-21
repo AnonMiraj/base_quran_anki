@@ -25,21 +25,31 @@ def get_line_data(cursor, word_start, word_end):
     SELECT word_index, word_key, text
     FROM words
     WHERE word_index BETWEEN ? AND ?
+    ORDER BY word_index
     """
     cursor.execute(query, (word_start, word_end))
+    rows = cursor.fetchall()
+
     line_data = []
-    for row in cursor.fetchall():
-        word_index, word_key, text = row
+
+    for i, (word_index, word_key, text) in enumerate(rows):
         surah_num, verse_num, word_num = map(int, word_key.split(":"))
-        next_word_key = f"{surah_num}:{verse_num}:{word_num + 1}"
-        cursor.execute("SELECT word_key FROM words WHERE word_key = ?", (next_word_key,))
-        end_verse = int(cursor.fetchone() is None)
+
+        # Determine if this word ends the ayah
+        if i == len(rows) - 1:
+            end_verse = 1
+        else:
+            _, next_word_key, _ = rows[i + 1]
+            _, next_verse_num, _ = map(int, next_word_key.split(":"))
+            end_verse = int(next_verse_num != verse_num)
+
         line_data.append({
             "word": word_index,
             "word_key": word_key,
             "text": text,
             "end_verse": end_verse
         })
+
     return line_data
 
 
@@ -215,18 +225,40 @@ def create_bismillah_line(soup, line_number):
     line_div.append(bismillah_div)
     return line_div
 
+#cache template once
+with open("index.html", "r", encoding="utf-8") as file:
+    TEMPLATE_HTML = file.read()
 
 def process_page(page_number):
-    with sqlite3.connect(DB_LAYOUT_PATH) as conn_layout, sqlite3.connect(DB_WORDS_PATH) as conn_words:
-        cursor_layout = conn_layout.cursor()
-        cursor_words = conn_words.cursor()
-        pages_data = get_pages_data(cursor_layout, page_number)
-        with open("index.html", "r", encoding="utf-8") as file:
-            soup = BeautifulSoup(file, "html.parser")
-        modify_html_with_pages(soup, pages_data, cursor_words, page_number)
-        add_font_face(soup, f"pages/{int(page_number):03}.html", page_number)
+    conn_layout = sqlite3.connect(DB_LAYOUT_PATH)
+    conn_words = sqlite3.connect(DB_WORDS_PATH)
+
+    conn_layout.execute("PRAGMA journal_mode = MEMORY")
+    conn_layout.execute("PRAGMA synchronous = OFF")
+
+    conn_words.execute("PRAGMA journal_mode = MEMORY")
+    conn_words.execute("PRAGMA synchronous = OFF")
+
+    cursor_layout = conn_layout.cursor()
+    cursor_words = conn_words.cursor()
+
+    pages_data = get_pages_data(cursor_layout, page_number)
+
+    soup = BeautifulSoup(TEMPLATE_HTML, "html.parser")
+    modify_html_with_pages(soup, pages_data, cursor_words, page_number)
+
+    add_font_face(soup, f"pages/{page_number:03}.html", page_number)
+
+    conn_layout.close()
+    conn_words.close()
 
 
 if __name__ == "__main__":
-    for page_number in tqdm(range(1, 605), desc="Processing Pages"):
-        process_page(page_number)
+    pages = range(1, 605)
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        list(tqdm(
+            executor.map(process_page, pages),
+            total=len(pages),
+            desc="Processing Pages"
+        ))
