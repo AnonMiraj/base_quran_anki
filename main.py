@@ -27,19 +27,26 @@ def get_line_data(cursor, word_start, word_end):
     WHERE word_index BETWEEN ? AND ?
     ORDER BY word_index
     """
-    cursor.execute(query, (word_start, word_end))
+    cursor.execute(query, (word_start, word_end + 1))
     rows = cursor.fetchall()
+
+    actual_rows = [r for r in rows if r[0] <= word_end]
 
     line_data = []
 
-    for i, (word_index, word_key, text) in enumerate(rows):
+    for i, (word_index, word_key, text) in enumerate(actual_rows):
         surah_num, verse_num, word_num = map(int, word_key.split(":"))
 
         # Determine if this word ends the ayah
-        if i == len(rows) - 1:
-            end_verse = 1
+        if i == len(actual_rows) - 1:
+            if len(rows) > len(actual_rows):
+                _, next_word_key, _ = rows[len(actual_rows)]
+                _, next_verse_num, _ = map(int, next_word_key.split(":"))
+                end_verse = int(next_verse_num != verse_num)
+            else:
+                end_verse = 1
         else:
-            _, next_word_key, _ = rows[i + 1]
+            _, next_word_key, _ = actual_rows[i + 1]
             _, next_verse_num, _ = map(int, next_word_key.split(":"))
             end_verse = int(next_verse_num != verse_num)
 
@@ -58,7 +65,7 @@ def add_font_face(soup, output_file, page_number):
     @font-face {{
         font-family: 'v4-tajweed';
         src: url('_p{page_number}.ttf?v=1') format('truetype');
-        font-display: swap;
+        font-display: block;
     }}
     """
     style_tag = soup.find("style") or soup.new_tag("style")
